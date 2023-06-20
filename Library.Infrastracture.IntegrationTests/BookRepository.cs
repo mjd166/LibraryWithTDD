@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Library.Infrastracture.IntegrationTests
 {
-    public class BookRepository: IBookRepository
+    public class BookRepository : IBookRepository
     {
         private readonly LibraryContext _context;
 
@@ -30,12 +30,13 @@ namespace Library.Infrastracture.IntegrationTests
 
         public Book Get(int id)
         {
-           return _context.Books.FirstOrDefault(x => x.Id == id);
+            return _context.Books.FirstOrDefault(x => x.Id == id);
         }
 
         public void Update(Book book)
         {
-           
+            _context.Books.Update(book);
+            _context.SaveChanges();
         }
 
         internal List<Book> GetAll()

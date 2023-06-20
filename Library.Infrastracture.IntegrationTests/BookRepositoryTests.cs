@@ -1,6 +1,5 @@
 using AutoFixture;
 using Library.Domain;
-using System;
 using Xunit;
 
 namespace Library.Infrastracture.IntegrationTests
