@@ -7,6 +7,13 @@ namespace Library.Domain.Tests
 {
     public class BookTests
     {
+        private readonly Fixture _fixture;
+
+        public BookTests()
+        {
+            _fixture = new Fixture();
+        }
+
         [Fact]
         public void Should_Create_Book_Properly()
         {
@@ -30,10 +37,7 @@ namespace Library.Domain.Tests
         public void Should_Set_IsDelted_To_True()
         {
             //act
-            int id = 0;
-            string name = "TDD";
-            string shabak = "2121515851215";
-            var _book = new Book(id, name, shabak);
+            var _book = _fixture.Create<Book>();
 
             //act
             _book.Remove();
@@ -46,10 +50,7 @@ namespace Library.Domain.Tests
         public void Should_set_Isdeleted_To_False()
         {
             //act
-            int id = 0;
-            string name = "TDD";
-            string shabak = "2121515851215";
-            var _book = new Book(id, name, shabak);
+            var _book = _fixture.Create<Book>();
 
             //act
             _book.Restore();
@@ -62,9 +63,8 @@ namespace Library.Domain.Tests
         public void Shoul_Add_BookAuthor_To_Book_BookAuthors()
         {
             //arrange
-            var fixture = new Fixture();
-            var book = fixture.Create<Book>();
-            var bookAuthor = fixture.Create<BookAuthor>();
+            var book = _fixture.Create<Book>();
+            var bookAuthor = _fixture.Create<BookAuthor>();
             //act
             book.AddBookAuthor(bookAuthor);
 
@@ -76,9 +76,8 @@ namespace Library.Domain.Tests
         public void Should_Throw_Exception_When_BookAuthor_Exists()
         {
             //arrange
-            var fixture = new Fixture();
-            var book = fixture.Create<Book>();
-            var bookAuthor = fixture.Create<BookAuthor>();
+            var book = _fixture.Create<Book>();
+            var bookAuthor = _fixture.Create<BookAuthor>();
             book.AddBookAuthor(bookAuthor);
             //act  //assert
             Assert.Throws<BookAuthorDoublicatedException>(() => book.AddBookAuthor(bookAuthor));
@@ -88,14 +87,13 @@ namespace Library.Domain.Tests
         public void Should_Add_BookAuthors_To_BookAuthors()
         {
             //arrange
-            var fixture = new Fixture();
-            var book = fixture.Create<Book>();
+            var book = _fixture.Create<Book>();
             var bookauthors = new List<BookAuthor>();
-            var bookAuthor = fixture.Build<BookAuthor>()
+            var bookAuthor = _fixture.Build<BookAuthor>()
                 .With(x => x.BookId, 56)
                 .With(x => x.AuthorId, 606)
                 .Create();
-            var bookAuthor1 = fixture.Build<BookAuthor>()
+            var bookAuthor1 = _fixture.Build<BookAuthor>()
                 .With(x => x.BookId, 506)
                 .With(x=>x.AuthorId,66)
                 .Create();
@@ -116,8 +114,7 @@ namespace Library.Domain.Tests
         public void Should_Edit_Book_Info()
         {
             //arrange
-            var fixture = new Fixture();
-            var _book = fixture.Build<Book>()
+            var _book = _fixture.Build<Book>()
                 .With(x=>x.Shabak ,"MSN123")
                 .With(x=>x.Name,"TDD Tutorial").Create();
             string newName = "OnionArch";

@@ -26,5 +26,6 @@ namespace Library.Domain.Tests
             _author.Birthday.Should().Be(birthday); 
             _author._Gender.Should().Be(Gender.Male);   
         }
+       
     }
 }

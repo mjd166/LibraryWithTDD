@@ -1,5 +1,4 @@
-﻿using Library.Domain.Tests;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,12 +6,15 @@ namespace Library.Domain
 {
     public class Book
     {
-        public int Id;
-        public string Name;
-        public string Shabak;
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Shabak { get; set; }
         public bool IsDeleted { get; set; } = false;
         public LinkedList<BookAuthor> BookAuthors { get; set; }
+        public Book()
+        {
 
+        }
         public Book(int id, string name, string shabak)
         {
             Id = id;
