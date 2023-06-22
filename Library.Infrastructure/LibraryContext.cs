@@ -1,7 +1,7 @@
 ﻿using Library.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace Library.Infrastracture.IntegrationTests
+namespace Library.Infrastracture
 {
     public class LibraryContext:DbContext
     {

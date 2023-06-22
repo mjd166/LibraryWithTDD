@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Library.Infrastracture.IntegrationTests
+namespace Library.Infrastracture
 {
     public class BookRepository : IBookRepository
     {
@@ -33,6 +33,11 @@ namespace Library.Infrastracture.IntegrationTests
             return _context.Books.FirstOrDefault(x => x.Id == id);
         }
 
+        public Book Get(string name)
+        {
+            return _context.Books.FirstOrDefault(x => x.Name == name);
+        }
+
         public void Update(Book book)
         {
             _context.Books.Update(book);
@@ -43,5 +48,9 @@ namespace Library.Infrastracture.IntegrationTests
         {
             return _context.Books.ToList();
         }
+
+       
+
+       
     }
 }

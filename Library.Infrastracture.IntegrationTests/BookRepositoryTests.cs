@@ -10,7 +10,7 @@ namespace Library.Infrastracture.IntegrationTests
         private readonly Fixture _fixture;
         public BookRepositoryTests(RealDatabaseFixture dBfixture)
         {
-            //dBfixture = new RealDatabaseFixture();
+            dBfixture = new RealDatabaseFixture();
             _repository = new BookRepository(dBfixture.context);
             _fixture = new Fixture();
         }
@@ -20,14 +20,14 @@ namespace Library.Infrastracture.IntegrationTests
         {
             //arrange
             Book book = new Book(0, "BDD", "MSN2011");
-                
+
 
             //act
             int id = _repository.Add(book);
 
             //assert
 
-            Assert.Equal(book.Id, id);  
+            Assert.Equal(book.Id, id);
 
         }
 
@@ -60,7 +60,7 @@ namespace Library.Infrastracture.IntegrationTests
             var _book = _repository.Get(id);
 
             //assert
-            Assert.Equal(_book.Id, id); 
+            Assert.Equal(_book.Id, id);
 
         }
 
@@ -78,6 +78,36 @@ namespace Library.Infrastracture.IntegrationTests
             //assert
             Assert.Null(_book);
         }
+        [Fact]
+        public void Should_Return_Book_with_Passed_Name()
+        {
+            //arrange
+            string name = "Habbits";
+            var book = new Book(0, name, "TSD125");
+            _repository.Add(book);
+            //act
+            Book _book = _repository.Get(name);
+
+            //assert
+            Assert.Equal(book, _book);  
+
+        }
+
+        [Fact]
+        public void Should_Return_Null_When_Book_Notf_found()
+        {
+            //arrange 
+            string name = "Atomic Habbits";
+            var book = new Book(0, name, "362014");
+            _repository.Add(book);
+            //act
+            var actual = _repository.Get("TddBook");
+
+            //assert
+            Assert.Null(actual);
+            
+        }
+        
 
         [Fact]
         public void Should_Update_Book()
@@ -87,20 +117,20 @@ namespace Library.Infrastracture.IntegrationTests
             int id = _repository.Add(book);
             string editedname = "TDD";
             string editedshabak = "MSN2020";
-            book.Edit(editedname,editedshabak);
+            book.Edit(editedname, editedshabak);
             //act
             _repository.Update(book);
             var b = _repository.Get(id);
             //assert
             Assert.Equal(editedshabak, b.Shabak);
-            Assert.Equal(editedname,b.Name);
+            Assert.Equal(editedname, b.Name);
         }
 
         [Fact]
         public void Should_Delete_Book_With_Passed_Id()
         {
             //arrange
-            Book book = new Book(0, "BDD", "MSN2011");
+            Book book = new Book(0, "BDD plus clean arch", "MSN2011555");
             int id = _repository.Add(book);
 
             //act 
@@ -112,6 +142,6 @@ namespace Library.Infrastracture.IntegrationTests
             Assert.Null(b);
         }
 
-       
+
     }
 }
