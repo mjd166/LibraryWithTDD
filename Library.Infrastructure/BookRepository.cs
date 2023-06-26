@@ -44,7 +44,7 @@ namespace Library.Infrastracture
             _context.SaveChanges();
         }
 
-        internal List<Book> GetAll()
+        public List<Book> GetAll()
         {
             return _context.Books.ToList();
         }
