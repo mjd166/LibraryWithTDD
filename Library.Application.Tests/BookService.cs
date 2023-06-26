@@ -20,5 +20,14 @@ namespace Library.Application.Tests
             var book = new Book(0, command._name, command._shabank);
             return _repository.Add(book);
         }
+
+        public void Edit(EditBook editBookDto)
+        {
+            var _book = _repository.Get(editBookDto.Id);
+            if (_book is null)
+                throw new EntityNotFoundException();
+            _book.Edit(editBookDto.Title, editBookDto.Shabak);
+            _repository.Update(_book);
+        }
     }
 }

@@ -63,6 +63,52 @@ namespace Library.Application.Tests
 
         }
 
-        
+        [Fact]
+        public void Should_Edit_Book()
+        {
+            //arrange 
+            var EditBookDto =CreateSomeEditBookCommand();
+            var book = CreateSomeBook();
+            _repository.Get(EditBookDto.Id).Returns(book );
+
+            //act
+            _service.Edit(EditBookDto);
+
+            //assert
+            _repository.Received(1).Get(EditBookDto.Id);
+            _repository.Received(1).Update(Arg.Any<Book>());  
+            
+
+        }
+
+        [Fact]
+        public void Should_Throw_Exception_When_Not_Found_With_Id()
+        {
+            //arrange
+            var editbookdto = CreateSomeEditBookCommand();
+           
+
+            //act
+            Action actual =()=> _service.Edit(editbookdto);
+
+            //assert
+            
+            actual.Should().Throw<EntityNotFoundException>();    
+        }
+
+        private EditBook CreateSomeEditBookCommand()
+        {
+            return new EditBook
+            {
+                Id = 1,
+                Shabak = "MSDDFd51",
+                Title = "Title"
+            };
+        }
+
+        private Book CreateSomeBook()
+        {
+           return  new Book(10, "Test Driven Development", "MNJD5d");
+        }
     }
 }

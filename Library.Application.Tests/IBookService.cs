@@ -3,5 +3,6 @@
     public interface IBookService
     {
         int Create(CreateBook command);
+        void Edit(EditBook editBookDto);
     }
 }
