@@ -1,4 +1,4 @@
-﻿namespace Library.Application.Tests
+﻿namespace Library.Application.DTOs
 {
     public class EditBook
     {

@@ -1,4 +1,6 @@
 using FluentAssertions;
+using Library.Application.DTOs;
+using Library.Application.Services;
 using Library.Common;
 using Library.Domain;
 using NSubstitute;
@@ -94,6 +96,15 @@ namespace Library.Application.Tests
             //assert
             
             actual.Should().Throw<EntityNotFoundException>();    
+        }
+
+        [Fact]
+        public void SHould_ReturnAll_Books()
+        {
+            var result = _service.GetAll();
+
+            //assert
+            _repository.Received(1).GetAll();
         }
 
         private EditBook CreateSomeEditBookCommand()

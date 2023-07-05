@@ -1,7 +1,9 @@
-﻿using Library.Common;
+﻿using Library.Application.DTOs;
+using Library.Common;
 using Library.Domain;
+using System.Collections.Generic;
 
-namespace Library.Application.Tests
+namespace Library.Application.Services
 {
     public class BookService : IBookService
     {
@@ -28,6 +30,11 @@ namespace Library.Application.Tests
                 throw new EntityNotFoundException();
             _book.Edit(editBookDto.Title, editBookDto.Shabak);
             _repository.Update(_book);
+        }
+
+        public List<Book> GetAll()
+        {
+            return _repository.GetAll();
         }
     }
 }

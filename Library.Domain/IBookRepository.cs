@@ -1,4 +1,6 @@
-﻿namespace Library.Domain
+﻿using System.Collections.Generic;
+
+namespace Library.Domain
 {
     public interface IBookRepository
     {
@@ -6,6 +8,7 @@
         Book Get(int id);
         Book Get(string name);
         void Update(Book book);
-        void Delete(int id);    
+        void Delete(int id);
+        List<Book> GetAll();
     }
 }
