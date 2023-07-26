@@ -2,6 +2,7 @@
 using Library.Common;
 using Library.Domain;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Library.Application.Services
 {
@@ -32,9 +33,18 @@ namespace Library.Application.Services
             _repository.Update(_book);
         }
 
-        public List<Book> GetAll()
+        public List<BookDto> GetAll()
         {
-            return _repository.GetAll();
+            var result = _repository.GetAll();
+
+            return result.Select(b => new BookDto
+            {
+                Id = b.Id,
+                Shabak = b.Shabak,
+                Title = b.Name
+            }).OrderByDescending(b => b.Id)
+              .ToList();
         }
+      
     }
 }
